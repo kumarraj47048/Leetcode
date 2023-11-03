@@ -1,7 +1,7 @@
 class Solution {
     public List<String> buildArray(int[] target, int n) {
         int sz=target.length;
-        Arrays.sort(target);
+        //Arrays.sort(target);
         boolean ch[]=new boolean[target[sz-1]+1];
         for(int i=0;i<target.length;i++){
             ch[target[i]]=true;
