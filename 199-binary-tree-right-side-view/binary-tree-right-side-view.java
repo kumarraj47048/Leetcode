@@ -15,17 +15,17 @@
  */
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
-        ArrayList<TreeNode> list=new ArrayList<>();
-        //Collections.fill(list,Integer.MIN_VALUE);
+        ArrayList<Integer> list=new ArrayList<>();
+       // Collections.fill(list,Integer.MIN_VALUE);
         addRightSideView(root, list, 0);
-        ArrayList<Integer> ans=new ArrayList<>();
-        for(TreeNode i:list) ans.add(i.val);
-        return ans;
+        //ArrayList<Integer> ans=new ArrayList<>();
+        //for(TreeNode i:list) ans.add(i.val);
+        return list;
     }
-    public static void addRightSideView(TreeNode root, ArrayList<TreeNode> list, int level){
+    public static void addRightSideView(TreeNode root, ArrayList<Integer> list, int level){
         if(root==null) return;
         if(list.size()<=level){
-            list.add(root);
+            list.add(root.val);
         }
         addRightSideView(root.right,list,level+1);
         addRightSideView(root.left,list,level+1);
