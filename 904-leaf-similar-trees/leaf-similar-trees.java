@@ -21,9 +21,9 @@ class Solution {
         ArrayList<TreeNode> list2=new ArrayList<>();
        help(root1,list1); 
        help2(root2,list2);
-       for(TreeNode v:list1) System.out.print(v.val+" ");
-       System.out.println();
-       for(TreeNode v: list2) System.out.print(v.val+" ");
+    //    for(TreeNode v:list1) System.out.print(v.val+" ");
+    //    System.out.println();
+    //    for(TreeNode v: list2) System.out.print(v.val+" ");
        if(list1.size()!=list2.size()) return false;
        for(int i=0;i<list1.size();i++){
            if(list1.get(i).val!=list2.get(i).val) return false;
