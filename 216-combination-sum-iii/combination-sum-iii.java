@@ -2,6 +2,7 @@ class Solution {
     public List<List<Integer>> combinationSum3(int k, int n) {
         List<List<Integer>> ans=new ArrayList<>();
         dfs(k,n,ans,new ArrayList<>(),0,1);
+        System.gc();
         return ans;
     }
 
