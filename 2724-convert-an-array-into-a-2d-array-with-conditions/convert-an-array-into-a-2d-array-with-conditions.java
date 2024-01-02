@@ -22,6 +22,7 @@ class Solution {
              }
              ans.add(in); 
          }
+         System.gc();
          return ans;
     }
 }
