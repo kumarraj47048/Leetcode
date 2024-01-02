@@ -1,20 +1,20 @@
 class DataStream {
-    Queue<Integer> qu;
+    int ct=0;
     int value;
     int k;
     public DataStream(int value, int k) {
        
-       qu=new LinkedList<>();
+        ct=0;
         this.value=value;
         //list.add(value);
         this.k=k;
     }
     
     public boolean consec(int num) {
-       if(num==value) qu.add(num);
-       else qu=new LinkedList<>();
-    //    System.gc();
-       return qu.size()>=k;
+       if(num==value) ct++;
+       else ct=0;
+    //   System.gc();
+       return ct>=k;
     }
 }
 
