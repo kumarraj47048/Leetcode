@@ -13,7 +13,7 @@ class DataStream {
     public boolean consec(int num) {
        if(num==value) ct++;
        else ct=0;
-    //   System.gc();
+      //System.gc();
        return ct>=k;
     }
 }
