@@ -13,6 +13,7 @@ class DataStream {
     public boolean consec(int num) {
        if(num==value) qu.add(num);
        else qu=new LinkedList<>();
+    //    System.gc();
        return qu.size()>=k;
     }
 }
