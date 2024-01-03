@@ -8,8 +8,8 @@ class Solution {
         for(int i=0;i<row;i++){
              ctR=0;
             String s=bank[i];
-            for(int j=0;j<s.length();j++){
-                if(s.charAt(j)=='1') ctR++;
+            for(char ch:s.toCharArray()){
+                if(ch=='1') ctR++;
             }
             if(ctR>0){
                 ans+=(ctR*prev);
