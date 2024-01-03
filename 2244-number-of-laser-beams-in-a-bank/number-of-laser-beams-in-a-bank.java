@@ -17,6 +17,7 @@ class Solution {
             }
             ctR=0;
         }
+        System.gc();
         return ans;
     }
 }
