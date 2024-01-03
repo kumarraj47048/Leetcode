@@ -3,7 +3,7 @@ class Solution {
         int ans=0;
         int row=bank.length;
         int ctR=0;
-       // ArrayList<Integer> list=new ArrayList<>();
+       
         int prev=0;
         for(int i=0;i<row;i++){
              ctR=0;
