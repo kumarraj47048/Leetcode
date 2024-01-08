@@ -10,7 +10,11 @@ class Solution {
                 if(i<m-1 && j<n-1){
                     dp[i][j]=Math.min(dp[i+1][j], dp[i][j+1])+grid[i][j];
                 }
-                 if(i>=m-1 && j<n-1) dp[i][j]=grid[i][j]+dp[i][j+1];
+                // when we are at last row but not in last column , then
+                // we need to add right subpart
+                 if(i>=m-1 && j<n-1) dp[i][j]=grid[i][j]+dp[i][j+1]; 
+                // when we are at last column but not in last row, then
+                // we need to add down subpart
                  if(j>=n-1 && i<m-1) dp[i][j]=grid[i][j]+dp[i+1][j];
             }
         }
