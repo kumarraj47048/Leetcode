@@ -18,7 +18,7 @@ class Solution {
             }
         }
         int l=dp[m][n];
-        System.out.println(l);
+      //  System.out.println(l);
         return m-l+n-l;
     }
 }
