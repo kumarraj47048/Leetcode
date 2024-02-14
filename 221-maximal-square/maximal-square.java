@@ -1,12 +1,12 @@
 class Solution {
     int maxK=0;
     public int maximalSquare(char[][] matrix) {
-        int row=matrix.length;
-        int col=matrix[0].length;
-        int dp[][]=new int[row+1][col+1];
-        for(int i=0;i<row;i++){
-             Arrays.fill(dp[i],-1);
-        }
+        // int row=matrix.length;
+        // int col=matrix[0].length;
+        // int dp[][]=new int[row+1][col+1];
+        // for(int i=0;i<row;i++){
+        //      Arrays.fill(dp[i],-1);
+        // }
         solveTab(matrix);
         return maxK*maxK;
     }
