@@ -10,10 +10,10 @@ class Solution {
              mid=(left+right)/2;
             if(check(piles,h,mid)){
                 if(mid-1>0 && !check(piles,h,mid-1)) return mid;
-                else{
+            
                 right=mid-1;
                 ans=mid;
-                }
+                
                 }
             else left=mid+1;
         }
