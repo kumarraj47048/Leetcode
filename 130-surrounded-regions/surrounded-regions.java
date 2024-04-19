@@ -31,24 +31,9 @@ class Solution {
         Queue<Pair> q=new LinkedList<>();
         int row=board.length;
         int col=board[0].length;
+        q.add(new Pair(i,j));
         board[i][j]='1';
-        if(i-1>=0 && board[i-1][j]=='O'){
-            board[i-1][j]='1';
-            q.add(new Pair(i-1,j));
-        }
-         if(j-1>=0 && board[i][j-1]=='O'){
-            board[i][j-1]='1';
-            q.add(new Pair(i,j-1));
-        }
-        if(i+1<row && board[i+1][j]=='O'){
-            board[i+1][j]='1';
-            q.add(new Pair(i+1,j));
-        }
-        if(j+1<col && board[i][j+1]=='O'){
-            board[i][j+1]='1';
-            q.add(new Pair(i,j+1));
-        }
-
+        
         while(q.size()>0){
             Pair curr=q.poll();
             board[curr.x][curr.y]='1';
