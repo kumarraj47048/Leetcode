@@ -33,5 +33,4 @@ class Solution {
         head = prevNode;
         return head;
     }
-    
 }
