@@ -18,7 +18,7 @@ class Solution {
         return (dfs(root)==1);
     }
     public int dfs(TreeNode root){
-       if(root.left==null || root.right==null) return root.val;
+       if(root.left==null) return root.val;
        int op=root.val;
        int l=dfs(root.left);
        int r=dfs(root.right);
