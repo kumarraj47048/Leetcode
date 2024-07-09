@@ -15,7 +15,6 @@ class Solution {
 
         double sum=0;
         for(int i=0;i<n;i++){
-            System.out.print(pf[i]-nums[i][0]+" ");
             sum=sum+(double)pf[i]-(double)nums[i][0];
         }
         return (double)(sum/n);
