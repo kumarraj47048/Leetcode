@@ -1,44 +1,37 @@
 class Solution {
-
     public int maximumGain(String s, int x, int y) {
-        // Ensure "ab" always has higher points than "ba"
-        if (x < y) {
-            // Swap points
+        char[] stack = new char[s.length()];
+        int top = -1;
+        int score = 0;
+
+        char first = 'a', second = 'b';
+        if (y > x) {
+            first = 'b';
+            second = 'a';
             int temp = x;
             x = y;
             y = temp;
-            // Reverse the string to maintain logic
-            s = new StringBuilder(s).reverse().toString();
         }
 
-        int aCount = 0, bCount = 0, totalPoints = 0;
-
-        for (int i = 0; i < s.length(); i++) {
-            char currentChar = s.charAt(i);
-
-            if (currentChar == 'a') {
-                aCount++;
-            } else if (currentChar == 'b') {
-                if (aCount > 0) {
-                    // Can form "ab", remove it and add points
-                    aCount--;
-                    totalPoints += x;
-                } else {
-                    // Can't form "ab", keep 'b' for potential future "ba"
-                    bCount++;
-                }
+        for (char c : s.toCharArray()) {
+            if (top >= 0 && stack[top] == first && c == second) {
+                top--;
+                score += x;
             } else {
-                // Non 'a' or 'b' character encountered
-                // Calculate points for any remaining "ba" pairs
-                totalPoints += Math.min(bCount, aCount) * y;
-                // Reset counters for next segment
-                aCount = bCount = 0;
+                stack[++top] = c;
             }
         }
 
-        // Calculate points for any remaining "ba" pairs at the end
-        totalPoints += Math.min(bCount, aCount) * y;
+        int newTop = -1;
+        for (int i = 0; i <= top; i++) {
+            if (newTop >= 0 && stack[newTop] == second && stack[i] == first) {
+                newTop--;
+                score += y;
+            } else {
+                stack[++newTop] = stack[i];
+            }
+        }
 
-        return totalPoints;
+        return score;
     }
 }
