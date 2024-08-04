@@ -1,19 +1,17 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
-     List<List<Integer>> list=new ArrayList<>();
-     List<Integer> in=new ArrayList<>();
-     rec(nums,0,list,in);
-     return list;
+        List<List<Integer>> list=new ArrayList<>();
+         help(nums,0,list,new ArrayList<>());
+        return list;
     }
-    public static void rec(int nums[],int i,List<List<Integer>> list, List<Integer> in ){
-         if(i==nums.length){
-            list.add(new ArrayList<>(in));
+    public static void help(int nums[], int idx, List<List<Integer>> list, ArrayList<Integer> inList){
+        if(idx>=nums.length){
+            list.add(new ArrayList<>(inList));
             return;
-         }
-         in.add(nums[i]);
-         rec(nums,i+1,list,in);
-         in.remove(in.size()-1);
-         rec(nums,i+1,list,in);
-         return;
+        }
+        inList.add(nums[idx]);
+        help(nums,idx+1,list,inList);
+        inList.remove(inList.size()-1);
+        help(nums,idx+1,list,inList);
     }
 }
