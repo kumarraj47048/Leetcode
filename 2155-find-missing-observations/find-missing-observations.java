@@ -9,11 +9,19 @@ class Solution {
         for(int i=0;i<n;i++) ans[i]++;
         rem-=n;
         for(int i=0;i<n;i++){
-            for(int k=0;k<5;k++){
-                if(rem>0){
-                    ans[i]++;
-                    rem--;
-                }
+            // for(int k=0;k<5;k++){
+            //     if(rem>0){
+            //         ans[i]++;
+            //         rem--;
+            //     }
+            // }
+            if(rem-5>=0){
+                ans[i]+=5;
+                rem-=5;
+            }
+            else{
+                ans[i]+=rem;
+                rem=0;
             }
         }
         return ans;
