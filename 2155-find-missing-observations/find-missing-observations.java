@@ -3,12 +3,8 @@ class Solution {
         int ans[]=new int[n];
         int m=rolls.length;
         int sum=0;
-        System.out.println(m+" ");
         for(int i:rolls) sum+=i;
-        System.out.println(sum+" ");
         int rem=(mean*(n+m))-sum;
-        System.out.println(mean*(n+m)+" ");
-        System.out.println(rem);
         if(n*6<rem || rem<=0 || rem<n) return new int[]{};
         for(int i=0;i<n;i++) ans[i]++;
         rem-=n;
