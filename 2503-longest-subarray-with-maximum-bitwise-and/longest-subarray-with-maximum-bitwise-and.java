@@ -8,12 +8,13 @@ class Solution {
         for(int i=0;i<n;i++){
             if(nums[i]==max){
                 ct++;
-                ans=Math.max(ans,ct);
             }
             else{
+                ans=Math.max(ans,ct);
                 ct=0;
             }
         }
+        ans=Math.max(ans,ct);
         return ans;
     }
 }
