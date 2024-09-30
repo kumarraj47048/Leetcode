@@ -13,9 +13,7 @@ class CustomStack {
     public int pop() {
         if(list.size()==0) return -1;
         else{
-            int temp=list.get(list.size()-1);
-            list.remove(list.size()-1);
-            return temp;
+            return list.remove(list.size()-1);
         }
     }
     
