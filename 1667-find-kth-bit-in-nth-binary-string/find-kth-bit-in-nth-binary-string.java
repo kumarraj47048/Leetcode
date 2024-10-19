@@ -2,7 +2,7 @@ class Solution {
     public char findKthBit(int n, int k) {
         ArrayList<Character> list=new ArrayList<>();
         list.add('0');
-        System.out.println(list);
+     //   System.out.println(list);
         for(int i=2;i<=n;i++){
             char ch[]=new char[list.size()];
             ch=reverse(list);
