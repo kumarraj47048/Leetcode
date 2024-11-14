@@ -21,7 +21,7 @@ class Solution {
     }
     public static boolean check(int n, int quantities[], int x){
         int temp=n;
-       System.out.println(x);
+     //  System.out.println(x);
         int len=quantities.length;
         int idx=0;
         while(idx<len && temp>0){
