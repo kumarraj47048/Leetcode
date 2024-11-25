@@ -22,7 +22,7 @@ class Solution {
         return list;
     }
     public static void func(TreeNode root, List<Integer> list, int level){
-        if(root==null) return;
+      //  if(root==null) return;
         if(list.size()<level) list.add(root.val);
         if(root.right!=null) func(root.right,list,level+1);
         if(root.left!=null) func(root.left,list,level+1);
