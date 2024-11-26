@@ -16,8 +16,8 @@ class Solution {
         if((root==p) || (root==q)) return root;
         TreeNode leftFunc=func(root.left,p,q);
         TreeNode rightFunc=func(root.right,p,q);
-        if(leftFunc==p && rightFunc==q) return root;
-        if(rightFunc==p && leftFunc==q) return root;
+        if(leftFunc!=null && rightFunc!=null) return root;
+        
         if(leftFunc!=null && rightFunc==null) return leftFunc;
         if(leftFunc==null && rightFunc!=null) return rightFunc;
         return null;
