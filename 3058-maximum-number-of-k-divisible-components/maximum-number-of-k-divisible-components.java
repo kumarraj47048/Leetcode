@@ -1,5 +1,5 @@
 class Solution {
-    //public static int ct=0;
+    public int ct=0;
     public int maxKDivisibleComponents(int n, int[][] edges, int[] values, int k) {
         ArrayList<Integer> list[]=new ArrayList[n+1];
         for(int i=0;i<=n;i++) list[i]=new ArrayList<>();
@@ -9,20 +9,20 @@ class Solution {
               list[i[0]].add(i[1]);
         }
         int dp[]=new int[n+1];
-        int ct[]=new int[1];
-       dfs(list,0,dp,values,-1,k,ct);
-       return ct[0]+1;
+        //int ct[]=new int[1];
+       dfs(list,0,dp,values,-1,k);
+       return ct+1;
     }
 
-    public static void dfs(ArrayList<Integer> list[],int root, int dp[], int values[],int parent,int k,int ct[]){
+    private void dfs(ArrayList<Integer> list[],int root, int dp[], int values[],int parent,int k){
 
         for(int u:list[root]){
-            if(u!=parent) dfs(list,u,dp,values,root,k,ct);
+            if(u!=parent) dfs(list,u,dp,values,root,k);
         }
         dp[root]=values[root];
         for(int u:list[root]){
             if(u!=parent){
-                if(dp[u]%k==0) ct[0]++;
+                if(dp[u]%k==0) ct++;
                 else dp[root]+=dp[u];
             }
         }
