@@ -23,7 +23,7 @@ class Solution {
         }
         int t = 2;
         for (int l = 2; l >= 1; l--) {
-            System.out.println(n-(t*k)+1); 
+           // System.out.println(n-(t*k)+1); 
             for (int i = n - (t*k) +1; i >= 1; i--) {
                 dp[i][l][0] = i;
                 dp[i][l][1] = pf[i];
@@ -37,10 +37,10 @@ class Solution {
             t++;
         }
 
-        for(int i=1;i<=n;i++){
-            System.out.print(dp[i][1][0]+" "+dp[i][1][1]+", ");
-        }
-        System.out.println();
+        // for(int i=1;i<=n;i++){
+        //     System.out.print(dp[i][1][0]+" "+dp[i][1][1]+", ");
+        // }
+        // System.out.println();
     int ans[]=new int[3];
     int max=0;
     int idx=n+1;
@@ -50,12 +50,12 @@ class Solution {
             idx=i;
         }
     }
-    for(int l=3;l>=1;l--){
-        for(int i=1;i<=n;i++){
-            System.out.print(dp[i][l][0]+" = "+dp[i][l][1]+", ");
-        }
-        System.out.println();
-    }
+    // for(int l=3;l>=1;l--){
+    //     for(int i=1;i<=n;i++){
+    //         System.out.print(dp[i][l][0]+" = "+dp[i][l][1]+", ");
+    //     }
+    //     System.out.println();
+    // }
     ans[0]=idx-1;
     ans[1]=dp[idx][1][0]-1;
     ans[2]=dp[ans[1]+1][2][0]-1;
