@@ -1,16 +1,20 @@
 class Solution {
     public int countGoodStrings(int low, int high, int zero, int one) {
-        int dp[]=new int[high+1];
-        dp[0]=1;
+        int ans=0;
         int mod=1000000007;
-        for(int i=1;i<=high;i++){
-            if(i-zero>=0)
-            dp[i]=(dp[i]+dp[i-zero])%mod;
-            if(i-one>=0)
-            dp[i]=(dp[i]+dp[i-one])%mod;
+        int dp[]=new int[high+1];
+        Arrays.fill(dp,-1);
+       // rec(high,one,zero,dp);
+        for(int i=low;i<=high;i++){
+            ans=(ans+rec(i,one,zero,dp))%mod;
         }
-      int ans=0;
-      for(int i=low;i<=high;i++) ans=(ans+dp[i])%mod;
-      return ans;
+        return ans%mod;
+    }
+    public int rec(int length,int one, int zero,int dp[]){
+        int mod=1000000007;
+        if(length<0) return 0;
+        if(length==0) return 1;
+        if(dp[length]!=-1) return dp[length]%mod;
+        return dp[length]=(rec(length-one,one,zero,dp)+rec(length-zero,one,zero,dp))%mod;
     }
 }
