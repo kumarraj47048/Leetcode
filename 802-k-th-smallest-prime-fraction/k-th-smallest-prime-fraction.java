@@ -1,45 +1,26 @@
 class Solution {
     public int[] kthSmallestPrimeFraction(int[] arr, int k) {
-        double low = 0.0;
-        double high = 1.0;
-        
-        while(low < high){
-            double mid = (low + high) / 2;
-            
-            // for returning ans
-            int p = 0;
-            int q = 1;
-            
-            int count = 0;
-            int j = 0;
-            for(int i=0 ; i<arr.length ; i++){
-                while(j < arr.length && arr[i] * 1.0 > mid * arr[j] ){
-                   j++;
-                }
-
-                if(j == arr.length) break;
-
-                count += (arr.length - j);
-                
-                // taking nearest possible ans 
-                if(p * arr[j] < q * arr[i]){
-                    // (arr[i] / arr[j] > p / q)
-                    p = arr[i];
-                    q = arr[j];
-                }
-            }
-            
-            if(count < k){
-                low = mid;
-            } 
-            else if(count > k){
-                high = mid;
-            } 
-            else {
-                return new int[]{p, q};
+        int n=arr.length;
+        PriorityQueue<Pair> p=new PriorityQueue<Pair>((a,b)->Double.compare(b.div,a.div));
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                p.add(new Pair((double)arr[i]/(double)arr[j],arr[i],arr[j]));
+                if(p.size()>k) p.poll();
             }
         }
-        
-        return null;
+        int ans[]=new int[2];
+        ans[0]=p.peek().a;
+        ans[1]=p.peek().b;
+        return ans;
+    }
+}
+class Pair{
+    double div;
+    int a;
+    int b;
+    Pair(double div,int a, int b){
+        this.div=div;
+        this.a=a;
+        this.b=b;
     }
 }
