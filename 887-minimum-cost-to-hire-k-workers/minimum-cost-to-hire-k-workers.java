@@ -1,30 +1,35 @@
 class Solution {
     public double mincostToHireWorkers(int[] quality, int[] wage, int k) {
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
-        List<Pair<Double, Integer>> ratio = new ArrayList<>();
-        int n = quality.length, qualitySum = 0;
-        double res = Double.MAX_VALUE, maxRate = 0.0;
-
-        for (int i = 0; i < n; ++i) {
-            ratio.add(new Pair<>((double) wage[i] / quality[i], i));
+        int n=wage.length;
+        double min=Double.MAX_VALUE;
+        Pair arr[]=new Pair[n];
+        for(int i=0;i<n;i++){
+            arr[i]=new Pair(1.0*wage[i]/quality[i], quality[i]);
         }
-
-        ratio.sort(Comparator.comparingDouble(p -> p.getKey()));
-        for (int i = 0; i < k; ++i) {
-            qualitySum += quality[ratio.get(i).getValue()];
-            maxRate = Math.max(maxRate, ratio.get(i).getKey());
-            maxHeap.offer(quality[ratio.get(i).getValue()]);
+        Arrays.sort(arr,(a,b)->Double.compare(a.ratio,b.ratio));
+        double sum=0;
+        PriorityQueue<Integer> p=new PriorityQueue<>(Collections.reverseOrder());
+        for(int i=0;i<k-1;i++){
+            p.add(arr[i].qual);
+            sum+=arr[i].qual;
         }
-
-        res = maxRate * qualitySum;
-        for (int i = k; i <n; ++i) {
-            maxRate = Math.max(maxRate, ratio.get(i).getKey());
-            qualitySum -= maxHeap.poll();
-            qualitySum += quality[ratio.get(i).getValue()];
-            maxHeap.offer(quality[ratio.get(i).getValue()]);
-            res = Math.min(res, maxRate * qualitySum);
+        
+        for(int i=k-1;i<n;i++){
+            sum+=arr[i].qual;
+            p.add(arr[i].qual);
+            if(p.size()>k){
+                sum-=p.poll();
+            }
+            min=Math.min(min,sum*arr[i].ratio);
         }
-
-        return res;
+        return min;
+    }
+}
+class Pair{
+    double ratio;
+    int qual;
+    Pair(double ratio, int qual){
+        this.ratio=ratio;
+        this.qual=qual;
     }
 }
