@@ -16,7 +16,6 @@ class Solution {
         int i=0;
         
         while(p.size()>0){
-            System.out.print(p.peek().c+" "+p.peek().idx+" ,");
             arr[i++]=new Pair(p.peek().c,p.poll().idx);
         }
        
