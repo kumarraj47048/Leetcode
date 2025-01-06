@@ -12,20 +12,14 @@ class Solution {
             }
         }
         int ans[]=new int[n];
-        // ans[0]=currSum;
-        // //  if(ch[0]=='1'){
-        // //         front--;
-        // //         back++;
-        // //     }
+       
         for(int i=0;i<n;i++){
             ans[i]=currSum;
             if(ch[i]=='1'){
                 front--;
                 back++;
             }
-           // System.out.print(front+" "+back+" ");
             currSum=currSum-front+back;
-            
         }
         return ans;
     }
