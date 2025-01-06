@@ -18,12 +18,12 @@ class Solution {
         // //         back++;
         // //     }
         for(int i=0;i<n;i++){
-            ans[i]=Math.abs(currSum);
+            ans[i]=currSum;
             if(ch[i]=='1'){
                 front--;
                 back++;
             }
-            System.out.print(front+" "+back+" ");
+           // System.out.print(front+" "+back+" ");
             currSum=currSum-front+back;
             
         }
