@@ -1,25 +1,15 @@
 class Solution {
     public int[] minOperations(String boxes) {
         int n=boxes.length();
-        char ch[]=boxes.toCharArray();
-        int currSum=0;
-        int back=0;
-        int front=0;
+        
+        int []ans=new int[n];
         for(int i=0;i<n;i++){
-            if(ch[i]=='1'){
-                currSum+=i;
-                front++;
+            int op=0;
+            for(int j=0;j<n;j++){
+                if(boxes.charAt(j)=='1' && j!=i)
+                op+=Math.abs(j-i);
             }
-        }
-        int ans[]=new int[n];
-       
-        for(int i=0;i<n;i++){
-            ans[i]=currSum;
-            if(ch[i]=='1'){
-                front--;
-                back++;
-            }
-            currSum=currSum-front+back;
+            ans[i]=op;
         }
         return ans;
     }
