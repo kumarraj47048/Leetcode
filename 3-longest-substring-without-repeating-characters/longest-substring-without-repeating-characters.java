@@ -13,15 +13,18 @@ class Solution {
         return len;
     }
     public static boolean check(int i, int j, char ch[]){
-        int ct[]=new int[150];
+        //int ct[]=new int[150];
+        HashSet<Character> set =new HashSet<>();
+
         for(int k=i;k<=j;k++){
             char c=ch[k];
-            ct[(int)c]++;
+            if(set.contains(c)) return false;
+            set.add(c);
         }
 
-        for(int k=0;k<150;k++){
-            if(ct[k]>1) return false;
-        }
+        // for(int k=0;k<150;k++){
+        //     if(ct[k]>1) return false;
+        // }
         return true;
     }
 }
