@@ -1,23 +1,40 @@
 class Solution {
     public int minFlipsMonoIncr(String s) {
-        int n=s.length();
         char ch[]=s.toCharArray();
+        int n=s.length();
         int dp[][]=new int[n][2];
-        if(ch[0]=='0') dp[0][1]=1;
-        else dp[0][0]=1;
-        
-        for(int i=1;i<n;i++){
-            if(ch[i]=='0'){
-                int x=dp[i-1][1]+1; // previous is 0  -> 1,0 is not possible 
-                int y=dp[i-1][0];
-                dp[i][0]=dp[i-1][0];
-                dp[i][1]=Math.min(dp[i-1][1],dp[i-1][0])+1;
+        for(int i=0;i<n;i++){
+            dp[i][0]=-1;
+            dp[i][1]=-1;
+        }
+        dp[n-1][0]=func(0,0,ch,dp);
+        dp[n-1][1]=func(0,1,ch,dp);
+
+        return Math.min(dp[n-1][0], dp[n-1][1]);
+    }
+    public static int func(int i, int op, char ch[], int dp[][]){
+        int n=ch.length;
+        if(i==n) return 0;
+        if(ch[i]=='0'){
+            if(op==0){
+                if(dp[i][0]!=-1) return dp[i][0];
+                else dp[i][0]=Math.min(func(i+1,0,ch,dp),func(i+1,1,ch,dp));
             }
             else{
-                dp[i][1]=Math.min(dp[i-1][1],dp[i-1][0]);
-                dp[i][0]=dp[i-1][0]+1;
+                if(dp[i][1]!=-1) return dp[i][1];
+                else dp[i][1]=func(i+1,1,ch,dp)+1;
             }
         }
-        return Math.min(dp[n-1][0], dp[n-1][1]);
+        else{
+            if(op==0){
+                if(dp[i][0]!=-1) return dp[i][0];
+                else dp[i][0]=Math.min(func(i+1,0,ch,dp),func(i+1,1,ch,dp))+1;
+            }
+            else{
+                if(dp[i][1]!=-1) return dp[i][1];
+                else dp[i][1]=func(i+1,1,ch,dp);
+            }
+        }
+        return dp[i][op];
     }
 }
