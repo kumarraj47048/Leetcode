@@ -23,8 +23,9 @@ class Solution {
         set.add(u);
         while(q.size()>0){
             int curr=q.poll();
+            if(curr==v) return true;
             for(int dest:graph[curr]){
-                if(dest==v) return true;
+               // if(dest==v) return true;
                 if(!set.contains(dest)){
                 q.add(dest);
                 set.add(dest);
