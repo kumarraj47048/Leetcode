@@ -1,23 +1,24 @@
 class Solution {
     public int mincostTickets(int[] days, int[] costs) {
-        int dp[]=new int[days.length+1];
-        Arrays.fill(dp,-1);
-        return solve(days,costs,0,dp);
-    }
-    public int solve(int days[], int costs[],int idx, int dp[]){
         int n=days.length;
-        if(idx>=n) return 0;
-        if(dp[idx]!=-1) return dp[idx];
-        int option1=costs[0]+solve(days,costs,idx+1,dp);
-        int i;
-        for(i=idx;i<n && days[i]<days[idx]+7;i++);
-        
-        int option2=costs[1]+solve(days,costs,i,dp);
-        
-        for(i=idx;i<n && days[i]<days[idx]+30;i++);
-        
-        int option3=costs[2]+solve(days,costs,i,dp);
-        
-        return dp[idx]=Math.min(option1, Math.min(option2,option3));
+        int dp[]=new int[n];
+        Arrays.fill(dp,-1);
+        return solve(0,days,costs,dp);
+    }
+    public static int solve(int i, int days[], int costs[],int dp[]){
+        int n=days.length;
+        if(i>=n) return 0;
+        if(dp[i]!=-1) return dp[i];
+        int op1=costs[0]+solve(i+1,days,costs,dp);
+        int j=i;
+        int max_7days=days[i]+7;
+        while(j<n && days[j]<max_7days) j++;
+        int op2=costs[1]+solve(j,days,costs,dp);
+        int max_30days=days[i]+30;
+        j=i;
+        while(j<n && days[j]<max_30days) j++;
+        int op3=costs[2]+solve(j,days,costs,dp);
+
+        return dp[i]=Math.min(op1, Math.min(op2,op3));
     }
 }
