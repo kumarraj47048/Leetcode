@@ -1,6 +1,6 @@
 class Solution {
     public int profitableSchemes(int n, int minProfit, int[] group, int[] profit) {
-        int dp[][][]=new int[group.length][n+1][minProfit+1];
+        int dp[][][]=new int[101][101][101];
         for(int i=0;i<group.length;i++){
             for(int j=0;j<=n;j++) Arrays.fill(dp[i][j],-1);
         }
