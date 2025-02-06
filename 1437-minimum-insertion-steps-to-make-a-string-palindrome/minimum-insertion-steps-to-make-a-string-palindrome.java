@@ -1,26 +1,19 @@
 class Solution {
     public int minInsertions(String s) {
-        char ch[]=s.toCharArray();
-        int n=ch.length;
+        int n=s.length();
+        char ch1[]=s.toCharArray();
         char ch2[]=new char[n];
         int idx=0;
-        for(int i=n-1;i>=0;i--){
-            ch2[idx++]=ch[i];
-        }
-        int dp[][]=new int[n+1][n+1];
-        // for(int i=1;i<=n;i++){
-        //     dp[0][i]=i;
-        //     dp[i][0]=i;
-        // }
-        //int dp[][]=new int[n+1][n+1];
-        for(int i=1;i<=n;i++){
-            for(int j=1;j<=n;j++){
-                if(ch[i-1]!=ch2[j-1]){
-                    dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);
-                }
-                else dp[i][j]=1+dp[i-1][j-1];
-            }
-        }
-        return n-dp[n][n];
+        int dp[][]=new int[n][n];
+        for(int i=0;i<n;i++) Arrays.fill(dp[i],-1);
+        for(int i=n-1;i>=0;i--) ch2[idx++]=ch1[i];
+        return n-solve(ch1,ch2,0,0,dp);
+    }
+    public static int solve(char ch1[], char ch2[], int i, int j, int dp[][]){
+        int n=ch1.length;
+        if(i>=n || j>=n) return 0;
+        if(dp[i][j]!=-1) return dp[i][j];
+        if(ch1[i]==ch2[j]) return dp[i][j]=1+solve(ch1,ch2,i+1,j+1,dp);
+        else return dp[i][j]=Math.max(solve(ch1,ch2,i+1,j,dp), solve(ch1,ch2,i,j+1,dp));
     }
 }
