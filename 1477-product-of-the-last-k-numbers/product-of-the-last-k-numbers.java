@@ -2,12 +2,11 @@ class ProductOfNumbers {
     ArrayList<Integer> list;
     public ProductOfNumbers() {
         list=new ArrayList<>();
-       // list.add(1);
+       
     }
     
     public void add(int num) {
-        //int n=list.size();
-        //list.add(num*list.get(n-1));
+       
         list.add(num);
     }
     
