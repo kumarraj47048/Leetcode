@@ -1,22 +1,16 @@
 class Solution {
     public String stoneGameIII(int[] stoneValue) {
         int n=stoneValue.length;
-        int dp[]=new int[n];
-        Arrays.fill(dp,-1);
-        int val=solve(0,stoneValue,dp);
-        if(val<0) return "Bob";
-        else if(val==0) return "Tie";
-        else return "Alice";
-        
-    }
-    public static int solve(int idx,int stoneValue[], int dp[]){
-        int n=stoneValue.length;
-        if(idx>=n) return 0;
-        if(dp[idx]!=-1) return dp[idx];
-        int score=Integer.MIN_VALUE;
-        score=Math.max(score,stoneValue[idx]-solve(idx+1,stoneValue,dp));
-        if(idx+1<n) score=Math.max(score,stoneValue[idx]+stoneValue[idx+1]-solve(idx+2,stoneValue,dp));
-        if(idx+2<n) score=Math.max(score,stoneValue[idx]+stoneValue[idx+1]+stoneValue[idx+2]-solve(idx+3,stoneValue,dp));
-        return dp[idx]=score;
+        int dp[]=new int[n+1];
+        for(int i=n-1;i>=0;i--){
+            dp[i]=stoneValue[i]-dp[i+1];
+            if(i+2<=n)
+            dp[i]=Math.max(dp[i],stoneValue[i]+stoneValue[i+1]-dp[i+2]);
+            if(i+3<=n)
+            dp[i]=Math.max(dp[i],stoneValue[i]+stoneValue[i+1]+stoneValue[i+2]-dp[i+3]);
+        }
+        if(dp[0]>0) return "Alice";
+        else if(dp[0]<0) return "Bob";
+        else return "Tie";
     }
 }
