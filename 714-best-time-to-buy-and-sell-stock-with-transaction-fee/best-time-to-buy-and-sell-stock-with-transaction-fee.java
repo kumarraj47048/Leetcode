@@ -19,12 +19,12 @@ class Solution {
         if(dp[idx][decide]!=-1) return dp[idx][decide];
         int result=0;
         if(buy){
-            int consider=solve(idx+1,prices,fee,false,dp)-prices[idx];
+            int consider=solve(idx+1,prices,fee,false,dp)-prices[idx]-fee;
             int not_consider=solve(idx+1,prices,fee,true,dp);
             result=Math.max(consider,not_consider);
         }
         else{ // sell
-            int consider=solve(idx+1,prices,fee,true,dp)+prices[idx]-fee;
+            int consider=solve(idx+1,prices,fee,true,dp)+prices[idx];
             int not_consider=solve(idx+1,prices,fee,false,dp);
             result=Math.max(consider,not_consider);
         }
