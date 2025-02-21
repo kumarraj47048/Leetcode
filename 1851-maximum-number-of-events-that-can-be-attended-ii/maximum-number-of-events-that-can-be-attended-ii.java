@@ -19,8 +19,7 @@ class Solution {
         while(nextIdx<events.length && events[idx][1]>=events[nextIdx][0]){
             nextIdx++;
         }
-         take=events[idx][2]+solve(nextIdx,k-1,events,dp);
-         
+        take=events[idx][2]+solve(nextIdx,k-1,events,dp);
         return dp[idx][k]=Math.max(take,skip);
     }
 }
