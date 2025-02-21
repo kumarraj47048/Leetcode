@@ -22,7 +22,7 @@ class FindElements {
         q.add(tree);
         while(q.size()>0){
             int size=q.size();
-            for(int i=0;i<size;i++){
+            for(int i=0;i<q.size();i++){
                 TreeNode curr=q.poll();
                 System.out.println(curr.val);
                 if(curr.left!=null){
