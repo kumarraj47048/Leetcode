@@ -3,7 +3,7 @@ class Solution {
         int n=nums.length;
         int dp[]=new int[n];
         Arrays.fill(dp,1);
-        System.out.print(0+" "+1+", ");
+       // System.out.print(0+" "+1+", ");
         int t[]=new int[n];
         Arrays.fill(t,1);
         int max=1;
