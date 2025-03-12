@@ -26,7 +26,7 @@ class Solution {
         int ct=0;
         for(int i=0;i<n;i++){
             if(dp[i]==max) ct+=t[i];
-            System.out.print(i+" "+dp[i]+", ");
+           // System.out.print(i+" "+dp[i]+", ");
         }
     return ct;
     }
