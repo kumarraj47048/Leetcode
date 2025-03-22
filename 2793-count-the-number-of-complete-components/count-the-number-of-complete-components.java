@@ -33,23 +33,26 @@ class Solution {
                     ref++;
                     temp_q.add(u);
                     set.add(u);
-                }
-            }
-        }
-
-        Queue<Integer> q=new LinkedList<>();
-        q.add(source);
-        while(q.size()>0){
-            int curr=q.poll();
-            for(int u:graph[curr]){
-                if(out[u]!=ref) check_return=false;
-                if(vis[u]==false){
-                    q.add(u);
                     vis[u]=true;
                 }
             }
         }
+        for(int i:set){
+            if(out[i]!=ref) return false;
+        }
+       // Queue<Integer> q=new LinkedList<>();
+        // q.add(source);
+        // while(q.size()>0){
+        //     int curr=q.poll();
+        //     for(int u:graph[curr]){
+        //         if(out[u]!=ref) check_return=false;
+        //         if(vis[u]==false){
+        //             q.add(u);
+        //             vis[u]=true;
+        //         }
+        //     }
+        // }
 
-        return check_return;
+        return true;
     }
 }
