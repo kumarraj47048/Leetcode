@@ -12,9 +12,7 @@ class Solution {
         for(int i=n-2;i>=0;i--){
             right[i]=Math.max(nums[i],right[i+1]);
         }
-        for(int i=0;i<n;i++){
-            System.out.print(left[i]+" "+right[i]+" ,");
-        }
+       
         for(int i=1;i<n-1;i++){
             ans=Math.max(ans, (long)((left[i-1]-nums[i])*(long)right[i+1]));
         }
