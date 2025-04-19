@@ -1,25 +1,25 @@
 class Solution {
     public long countFairPairs(int[] nums, int lower, int upper) {
+        int n=nums.length;
+        long ct=0;
+        long right=0;
+        int p1=0,p2=n-1;
         Arrays.sort(nums);
-        int n=nums.length;
-        long left=count(nums,lower-1);
-        long right=count(nums,upper);
-        return right-left;
-        
-    }
-    public static long count(int[] nums, int limit){
-        int n=nums.length;
-        long ct1=0;
-        int p1=0;
-        int p2=n-1;
-
         while(p1<p2){
-            while(p1<p2 && nums[p1]+nums[p2]>limit){
-                p2--;
-            }
-            ct1+=(long)(p2-p1);
+            while(p1<p2 && nums[p1]+nums[p2]>upper) p2--;
+            right+=p2-p1;
             p1++;
         }
-        return ct1;
+
+        long left=0;
+        p1=0;
+        p2=n-1;
+         while(p1<p2){
+            while(p1<p2 && nums[p1]+nums[p2]>lower-1) p2--;
+            left+=p2-p1;
+            p1++;
+        }
+
+        return right-left;
     }
 }
