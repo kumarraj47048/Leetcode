@@ -13,7 +13,7 @@ class Solution {
             if(ct[i]>=k){
                 String x=Character.toString((char)(i+'a'));
                 q.add(x);
-                ans=ans.compareTo(x)>=0?ans:x;
+                ans=x;
             }
         }
 
@@ -22,8 +22,9 @@ class Solution {
             for(int i=0;i<26;i++){
                 String temp=curr+Character.toString((char)(i+'a'));
                 if(check(ch,k,temp)){
-                    if(ans.length()<temp.length()) ans=temp;
-                    else if(ans.length()==temp.length()) ans=ans.compareTo(temp)>=0?ans:temp;
+                   // if(ans.length()<temp.length()) ans=temp;
+                   // else if(ans.length()==temp.length()) ans=ans.compareTo(temp)>=0?ans:temp;
+                   ans=temp;
                     q.add(temp);
                 }
             }
