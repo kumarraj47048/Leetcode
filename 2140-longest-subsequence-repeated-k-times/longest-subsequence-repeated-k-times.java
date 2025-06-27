@@ -23,8 +23,7 @@ class Solution {
                 String temp=curr+Character.toString((char)(i+'a'));
                 if(check(ch,k,temp)){
                     if(ans.length()<temp.length()) ans=temp;
-                    else if(ans.length()==temp.length())
-                    ans=ans.compareTo(temp)>=0?ans:temp;
+                    else if(ans.length()==temp.length()) ans=ans.compareTo(temp)>=0?ans:temp;
                     q.add(temp);
                 }
             }
