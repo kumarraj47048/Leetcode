@@ -1,34 +1,38 @@
 class Solution {
     public int minimumDeleteSum(String s1, String s2) {
-        char ch1[]=s1.toCharArray();
-        char ch2[]=s2.toCharArray();
-        int n=ch1.length;
-        int m=ch2.length;
-
-        int dp[][]=new int[n+1][m+1];
-        for(int i=1;i<=n;i++){
-           dp[i][0]=ch1[i-1]+dp[i-1][0];
-        }
-        for(int i=1;i<=m;i++){
-           dp[0][i]=ch2[i-1]+dp[0][i-1];
-        }
-
-        for(int i=1;i<=n;i++){
-            for(int j=1;j<=m;j++){
-                if(ch1[i-1]==ch2[j-1]){
-                    dp[i][j]=dp[i-1][j-1];
-                }
-                else{
-                    int del_from_first=ch1[i-1]+ dp[i-1][j];
-                    
-                    int del_from_second=ch2[j-1]+ dp[i][j-1];
-
-                    dp[i][j]=Math.min(del_from_first, del_from_second);
-                    
-                }
+        int n=s1.length();
+        int m=s2.length();
+        int dp[][]=new int[n][m];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                dp[i][j]=-1;
             }
         }
+        return solve(0,0,s1,s2,dp);
+    }
+    public static int solve(int i, int j, String s1, String s2, int dp[][]){
+        int n=s1.length();
+        int m=s2.length();
+        if(i>=n && j>=m) return 0;
+        if(i>=n){
+            int sum=0;
+            while(j<m) sum+=s2.charAt(j++);
+            return sum;
+        }
 
-        return dp[n][m];
+        if(j>=m){
+            int sum=0;
+            while(i<n) sum+=s1.charAt(i++);
+            return sum;
+        }
+
+        if(dp[i][j]!=-1) return dp[i][j];
+        if(s1.charAt(i)==s2.charAt(j)) return dp[i][j]=solve(i+1,j+1,s1,s2,dp);
+        else{
+            int a=s2.charAt(j)+solve(i,j+1,s1,s2,dp);
+            int b=s1.charAt(i)+solve(i+1,j,s1,s2,dp);
+            
+            return dp[i][j]=Math.min(a,b);
+        }
     }
 }
