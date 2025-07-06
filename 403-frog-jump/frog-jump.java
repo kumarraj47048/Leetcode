@@ -16,19 +16,14 @@ class Solution {
         if(idx>=n) return false;
         boolean res=false;
         if(dp[idx][k]!=null) return dp[idx][k];
-       // int p1=idx+1;
-        // while(p1<n){
-        //     if(stones[idx]+k-1==stones[p1]) break;
-        //     p1++;
-        // }
-        
-         if(map.containsKey(stones[idx]+k-1))
+       
+        if(map.containsKey(stones[idx]+k-1))
          res=res||solve(map.get(stones[idx]+k-1),stones,k-1,map,dp);
 
-         if(map.containsKey(stones[idx]+k))
+        if(map.containsKey(stones[idx]+k))
          res=res||solve(map.get(stones[idx]+k),stones,k,map,dp);
 
-         if(map.containsKey(stones[idx]+k+1))
+        if(map.containsKey(stones[idx]+k+1))
          res=res||solve(map.get(stones[idx]+k+1),stones,k+1,map,dp);
 
 
