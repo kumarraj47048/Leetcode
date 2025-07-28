@@ -14,7 +14,7 @@ class Solution {
             if(curr==max) return 1;
             else return 0;
         }
-        String key=idx+" "+curr;
+        String key=idx+","+curr;
         if(map.containsKey(key)) return map.get(key);
        // if(dp[idx]!=-1) return dp[idx];
         int x=solve(idx+1,curr|nums[idx],nums,max,map) + solve(idx+1,curr,nums,max,map);
