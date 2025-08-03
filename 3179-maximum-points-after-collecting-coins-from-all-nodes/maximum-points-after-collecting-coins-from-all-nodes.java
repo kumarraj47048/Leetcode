@@ -23,7 +23,7 @@ class Solution {
        
        int a=(coins[root]/(1<<p))-k;
        int b=coins[root]/(1<<(p+1));
-       String key=root+","+par+","+p;
+       String key=root+","+p;
        if(map.containsKey(key)) return map.get(key);
        map.put(key,0);
        if(p>14) return 0;
