@@ -1,20 +1,22 @@
 class Solution {
     public int numDecodings(String s) {
-        Integer dp[]=new Integer[s.length()];
-        return helperFunc(s,0,dp);
-    }
-    public int helperFunc(String s, int i,Integer dp[]){
-        if(i>=s.length())
-        return 1;
-        if(s.charAt(i)=='0')
-        return 0;
-        if(dp[i]!=null)
-        return dp[i];
-        int ways=helperFunc(s,i+1,dp);
-        if(i+2<=s.length() && Integer.parseInt(s.substring(i,i+2))<=26){
-            ways+=helperFunc(s,i+2,dp);
+        int n=s.length();
+        char ch[]=s.toCharArray();
+        int dp[]=new int[n+1];
+        dp[0]=1;
+        if(s.charAt(0)!='0') dp[1]=1;
+        for(int i=2;i<=n;i++){
+            int ct=0;
+            String x=s.substring(i-1,i);
+            int val=Integer.parseInt(x);
+            if(x.charAt(0)!='0') ct+=dp[i-1];
+
+            x=s.substring(i-2,i);
+            val=Integer.parseInt(x);
+            if(x.charAt(0)!='0' && val<=26) ct+=dp[i-2];
+
+            dp[i]=ct;
         }
-        dp[i]=ways;
-        return dp[i];
+        return dp[n];
     }
 }
