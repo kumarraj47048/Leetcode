@@ -16,7 +16,6 @@ class Solution {
                 p1=i;
             }
         }
-       // ct+=(long)(curr*(curr+1))/2;
 
         return ct;
     }
