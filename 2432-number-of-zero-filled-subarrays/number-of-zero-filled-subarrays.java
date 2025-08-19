@@ -16,7 +16,6 @@ class Solution {
                 p1=i;
             }
         }
-
         return ct;
     }
 }
