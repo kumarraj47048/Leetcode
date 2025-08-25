@@ -1,37 +1,48 @@
 class Solution {
+    public HashMap<String,Integer> map=new HashMap<>();
     public int cherryPickup(int[][] grid) {
-        int m = grid.length;
-        int n = grid[0].length;
+        return solve(0,0,0,grid[0].length-1,grid);
+    }
+    public int solve(int r1, int c1, int r2, int c2, int grid[][]){
+        int row=grid.length;
+        int col=grid[0].length;
+        if(r1>=row) return 0;
+        
 
-        int[][][] dp = new int[2][n][n];
-        int ans = 0;
-
-        for(int i=0;i<2;i++)
-            for(int j=0;j<n;j++)
-                Arrays.fill(dp[i][j], -1);
-
-        dp[0][0][n-1] = grid[0][0] + grid[0][n-1];
-
-        for(int i=1;i<m;i++) {
-            for(int j=0;j<n;j++) { // robotA
-                for(int k=j+1;k<n;k++) { // robotB
-                    int max = -1;
-                    for(int x=-1;x<=1;x++) { // we will have total 9 combinations
-                        for(int y=-1;y<=1;y++) {
-                            if(j+x >= 0 && j+x < n && k+y >= 0 && k+y < n)
-                                max = Math.max(
-                                    max,
-                                    dp[(i+1)%2][j+x][k+y]
-                                );
-                        }
-                    }
-                    if(max != -1)
-                        dp[i%2][j][k] = max + grid[i][j] + grid[i][k];
-                    if(ans < dp[i%2][j][k]) ans = dp[i%2][j][k];
-                }
-            }
+        String key=r1+","+c1+","+r2+","+c2;
+        if(map.containsKey(key)) return map.get(key);
+        int sum=0;
+        if(c1==c2) sum+=grid[r1][c1];
+        else sum+=grid[r1][c1]+grid[r2][c2];
+        
+        int max=0;
+        //left down
+        if(c1-1>=0){
+            if(c2-1>=0) max=Math.max(max,solve(r1+1,c1-1,r2+1,c2-1,grid));
+                        max=Math.max(max,solve(r1+1,c1-1,r2+1,c2,grid));
+            if(c2+1<col) max=Math.max(max,solve(r1+1,c1-1,r2+1,c2+1,grid));
         }
+       
 
-        return ans;
+       //down
+          if(c2-1>=0)
+          max=Math.max(max,solve(r1+1,c1,r2+1,c2-1,grid));
+          max=Math.max(max,solve(r1+1,c1,r2+1,c2,grid));
+          if(c2+1<col)
+          max=Math.max(max,solve(r1+1,c1,r2+1,c2+1,grid));
+
+       
+       // right down
+
+       if(c1+1<col){
+            if(c2-1>=0) max=Math.max(max,solve(r1+1,c1+1,r2+1,c2-1,grid));
+                        max=Math.max(max,solve(r1+1,c1+1,r2+1,c2,grid));
+            if(c2+1<col) max=Math.max(max,solve(r1+1,c1+1,r2+1,c2+1,grid));
+        }
+      
+      map.put(key,sum+max);
+      return sum+max;
+        
+
     }
 }
