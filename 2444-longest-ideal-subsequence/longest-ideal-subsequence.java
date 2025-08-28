@@ -1,19 +1,19 @@
 class Solution {
     public int longestIdealString(String s, int k) {
-        int dp[]=new int[26];
-        int ans=1;
         int n=s.length();
-        char ch[]=s.toCharArray();
+        int dp[]=new int[26];
         for(int i=0;i<n;i++){
-            int ele=ch[i]-'a';
-            for(int j=ele;j>=0 && ele-j<=k;j--){
-                dp[ele]=Math.max(dp[ele],dp[j]+1);
+            int idx=s.charAt(i)-'a';
+            int best=0;
+            for(int j=0;j<26;j++){
+               if(Math.abs(j-idx)<=k){
+                 best=Math.max(best, dp[j]);
+               }
             }
-            for(int j=ele+1;j<26 && j-ele<=k;j++){
-                dp[ele]=Math.max(dp[ele],dp[j]+1);
-            }
-            ans=Math.max(ans,dp[ele]);
+            dp[idx]=best+1;
         }
-    return ans;
+        int max=0;
+        for(int i:dp) max=Math.max(max,i);
+        return max;
     }
 }
