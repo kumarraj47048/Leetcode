@@ -1,9 +1,13 @@
 class Solution {
+    int dp[];
     public int countNumbersWithUniqueDigits(int n) {
+        dp=new int[n+1];
+        Arrays.fill(dp,-1);
         int ct[]=new int[10];
         return solve(0,ct,n)+1;
     }
     public int solve(int idx, int ct[], int n){
+        if(dp[idx]!=-1) return dp[idx];
         int ans=0;
         if(idx==n) return 0;
         for(int i=0;i<=9;i++){
@@ -16,6 +20,6 @@ class Solution {
                 }
             }
         }
-        return ans;
+        return dp[idx]=ans;
     }
 }
