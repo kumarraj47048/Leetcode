@@ -10,15 +10,6 @@ class Solution {
             if(i%2==0) odd[i]+=nums[i];
             else even[i]+=nums[i];
         }
-        
-        for(int i=0;i<n;i++){
-            System.out.print(even[i]+" ");
-        }
-         
-         System.out.println();
-         for(int i=0;i<n;i++){
-            System.out.print(odd[i]+" ");
-        }
            
 
         int ct=0;
