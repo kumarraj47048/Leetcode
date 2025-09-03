@@ -1,44 +1,39 @@
 class Solution {
-    int maxK=0;
+    HashMap<String,Integer> map=new HashMap<>();
     public int maximalSquare(char[][] matrix) {
-        // int row=matrix.length;
-        // int col=matrix[0].length;
-        // int dp[][]=new int[row+1][col+1];
-        // for(int i=0;i<row;i++){
-        //      Arrays.fill(dp[i],-1);
-        // }
-        solveTab(matrix);
-        return maxK*maxK;
-    }
-    public int solve(char matrix[][], int i, int j, int dp[][]){
-        if(i>=matrix.length || j>=matrix[0].length) return 0;
-        if(dp[i][j]!=-1) return dp[i][j];
-        int right=solve(matrix,i,j+1,dp);
-        int diag=solve(matrix,i+1,j+1,dp);
-        int down=solve(matrix,i+1,j,dp);
-        
-        if(matrix[i][j]== '1'){
-             dp[i][j]=1+ Math.min(right, Math.min(down,diag));
-            maxK=Math.max(maxK,dp[i][j]);   
-        }
-        else dp[i][j]=0;
-        return dp[i][j];
-    }
-
-     public void solveTab(char matrix[][]){
-        int row=matrix.length;
-        int col=matrix[0].length;
-        int dp[][]=new int[row+1][col+1];
-        for(int i=row-1;i>=0;i--){
-            for(int j=col-1;j>=0;j--){
-                int right=dp[i][j+1];
-                int diag=dp[i+1][j+1];
-                int down=dp[i+1][j];
-                if(matrix[i][j]=='1'){
-                dp[i][j]=1+Math.min(right, Math.min(diag,down));
-                maxK=Math.max(maxK,dp[i][j]);
-                }
+        int max=0;
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                
+                if(matrix[i][j]=='1') max=Math.max(max,solve(i,j,matrix));
             }
         }
+        return max*max;
+    }
+    public int solve(int r, int c, char matrix[][]){
+        int row=matrix.length;
+        int col=matrix[0].length;
+        String key=r+","+c;
+        if(map.containsKey(key)) return map.get(key);
+        if(r>=row || c>=col) return 0;
+        if(matrix[r][c]=='0') return 0;
+
+        int right=0;
+        if(c+1<col){
+            right=solve(r,c+1,matrix);
+        }
+        int diag=0;
+        if(r+1<row && c+1<col){
+            diag=solve(r+1,c+1,matrix);
+        }
+        int down=0;
+        if(r+1<row){
+            down=solve(r+1,c,matrix);
+        }
+
+        int val=1+Math.min(right,Math.min(diag,down));
+        map.put(key,val);
+        return val;
+
     }
 }
