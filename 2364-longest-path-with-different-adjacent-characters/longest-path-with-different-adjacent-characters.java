@@ -23,26 +23,43 @@ class Solution {
 
     public int dfs(int root, int par, ArrayList<Integer> tree[], char ch[]){
         
-        ArrayList<Integer> val=new ArrayList<>();
+       // ArrayList<Integer> val=new ArrayList<>();
         // val.add(0);
         // val.add(0);
+        int first=0;
+        int second=0;
         char curr=ch[root];
         for(int v: tree[root]){
             if(v!=par && curr!=ch[v]){
                 int down=1+dfs(v,root,tree,ch);
-                val.add(down);
+                // val.add(down);
+                if(down>first){
+                    second=first;
+                    first=down;
+                }
+                else if(down<=first && down>second) second=down;
             }
             else if(v!=par) dfs(v,root,tree,ch);
         }
 
-        Collections.sort(val);
-        int sz=val.size();
-        
-        if(sz>=2){
-            max=Math.max(max,val.get(sz-1)+val.get(sz-2)-1);
+
+        if(first>0 && second>0){
+            max=Math.max(max,first+second-1);
         }
-        if(sz==1) max=Math.max(max,val.get(0));
-        if(val.size()==0) return 1;
-        return val.get(sz-1); 
+        if(first>0) max=Math.max(max,first);
+        
+        if(first==0 && second==0) return 1;
+
+        return first;
+
+        // Collections.sort(val);
+        // int sz=val.size();
+        
+        // if(sz>=2){
+        //     max=Math.max(max,val.get(sz-1)+val.get(sz-2)-1);
+        // }
+        // if(sz==1) max=Math.max(max,val.get(0));
+        // if(val.size()==0) return 1;
+        // return val.get(sz-1); 
     }
 }
