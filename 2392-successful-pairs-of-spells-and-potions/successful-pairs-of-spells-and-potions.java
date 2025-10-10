@@ -17,7 +17,7 @@ class Solution {
         int l=0;
         int r=n-1;
 
-        int ans=n;
+        int ans=-1;
         while(l<=r){
             int mid=(l+r)/2;
             long x=(long)potions[mid]*k;
@@ -30,7 +30,7 @@ class Solution {
             }
         }
 
-        if(ans==n) return 0;
+        if(ans==-1) return 0;
         else return n-ans;
     }
 }
