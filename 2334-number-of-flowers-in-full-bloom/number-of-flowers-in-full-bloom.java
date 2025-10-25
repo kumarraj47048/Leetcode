@@ -2,56 +2,48 @@ import java.util.*;
 
 class Solution {
     public int[] fullBloomFlowers(int[][] flowers, int[] people) {
-        int n = flowers.length;
-        int[] starts = new int[n];
-        int[] ends = new int[n];
-        
-        // Step 1: Separate start and end times
-        for (int i = 0; i < n; i++) {
-            starts[i] = flowers[i][0];
-            ends[i] = flowers[i][1];
-        }
-        
-        // Step 2: Sort them
-        Arrays.sort(starts);
-        Arrays.sort(ends);
-        
-        int m = people.length;
-        int[] ans = new int[m];
-        
-        // Step 3: For each person, find count using binary search
+        int m = flowers.length;
+        int n = people.length;
+
+        int[][] pf = new int[2 * m][2];
         for (int i = 0; i < m; i++) {
-            int time = people[i];
-            // Flowers started blooming <= time
-            int started = upperBound(starts, time);
-            // Flowers ended blooming < time
-            int ended = lowerBound(ends, time);
-            
-            ans[i] = started - ended;
+            int st = flowers[i][0];
+            int end = flowers[i][1];
+
+            pf[2 * i][0] = st;
+            pf[2 * i][1] +=1;
+            pf[2 * i + 1][0] = end + 1;
+            pf[2 * i + 1][1] += -1;
         }
-        
+
+        Arrays.sort(pf, (a, b) -> Integer.compare(a[0], b[0]));
+
+        for (int i = 1; i < 2 * m; i++) {
+            pf[i][1] += pf[i - 1][1];
+        }
+
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            int k = people[i];
+            ans[i] = binarySearch(pf, k);
+        }
+
         return ans;
     }
-    
-    // Returns index of first element > target (count of elements <= target)
-    private int upperBound(int[] arr, int target) {
-        int l = 0, r = arr.length;
-        while (l < r) {
-            int mid = l + (r - l) / 2;
-            if (arr[mid] <= target) l = mid + 1;
-            else r = mid;
-        }
-        return l;
-    }
 
-    // Returns index of first element >= target (count of elements < target)
-    private int lowerBound(int[] arr, int target) {
-        int l = 0, r = arr.length;
-        while (l < r) {
+    public int binarySearch(int[][] pf, int k) {
+        int l = 0, r = pf.length - 1;
+        int ans = -1;
+        while (l <= r) {
             int mid = l + (r - l) / 2;
-            if (arr[mid] < target) l = mid + 1;
-            else r = mid;
+            if (pf[mid][0] <= k) {
+                ans = mid;
+                l = mid + 1;
+            } else {
+                r = mid - 1;
+            }
         }
-        return l;
+        if(ans==-1) return 0;
+        return pf[ans][1];
     }
 }
