@@ -15,7 +15,7 @@ class Solution {
 
         }
 
-        Arrays.sort(pf,(a,b)->(a[0]-b[0]));
+        Arrays.sort(pf,(a,b)->Integer.compare(a[0],b[0]));
          System.out.println(pf[0][0]+"->"+pf[0][1]);
         for(int i=1;i<2*m;i++){
             pf[i][1]+=pf[i-1][1];
