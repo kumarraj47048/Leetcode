@@ -11,7 +11,7 @@ class Solution {
             sum+=dp[i];
         }
          
-        for(long i:dp) System.out.println(i);
+       // for(long i:dp) System.out.println(i);
 
         return sum;
     }
