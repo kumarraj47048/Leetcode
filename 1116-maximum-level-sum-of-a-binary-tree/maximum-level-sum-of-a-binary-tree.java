@@ -20,7 +20,6 @@ class Solution {
         int max=root.val;
         int curr=root.val;
         q.add(root);
-        //lvl[1]+=root.val;
         int ans=1;
         while(q.size()>0){
             lvl++;
