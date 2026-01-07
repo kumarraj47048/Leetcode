@@ -54,16 +54,3 @@ class Solution {
 
     }
 }
-class Pair{
-    TreeNode root;
-    int left;
-    int right;
-    int curr;
-
-    Pair(TreeNode root, int left, int right, int curr){
-        this.root=root;
-        this.left=left;
-        this.right=right;
-        this.curr=curr;
-    }
-}
