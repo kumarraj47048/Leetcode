@@ -44,11 +44,6 @@ class Solution {
         max=Math.max(max, (long)(right)*(total-right));
         if(curr!=0)
         max=Math.max(max, (long)(curr)*(total-curr));
-       
-
-        
-        
-        
 
         return curr;
 
